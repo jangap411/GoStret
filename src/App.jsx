@@ -19,6 +19,7 @@ const App = () => {
       <Router>
         <Routes>
           {/* Public routes */}
+          {/* FIXME: Update isLogin prop based on authentication state */}
           <Route element={<PublicRoute isLogin={false} />}>
             <Route element={<PublicRouteLayout />}>
               <Route path="/" element={<Landing />} />
