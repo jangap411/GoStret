@@ -13,14 +13,16 @@ import RideShareApp from "./components/screens/RideShareApp";
 import RideActivity from "./components/RideActivity";
 import AccountPage from "./pages/AccountPage";
 import PublicRoute from "./pages/PublicRoute";
+import { useSelector } from "react-redux";
 const App = () => {
+  const isLogin = useSelector((state) => state.auth.isLogin);
   return (
     <>
       <Router>
         <Routes>
           {/* Public routes */}
           {/* FIXME: Update isLogin prop based on authentication state */}
-          <Route element={<PublicRoute isLogin={false} />}>
+          <Route element={<PublicRoute isLogin={isLogin} />}>
             <Route element={<PublicRouteLayout />}>
               <Route path="/" element={<Landing />} />
               <Route path="/signin" element={<SignIn />} />
@@ -30,7 +32,7 @@ const App = () => {
           </Route>
 
           {/* Private routes */}
-          <Route element={<ProtectedRoute isLogin={false} />}>
+          <Route element={<ProtectedRoute isLogin={isLogin} />}>
             <Route element={<MainLayout />}>
               <Route path="/home" element={<HomePage />} />
               <Route path="/account" element={<AccountPage />} />
