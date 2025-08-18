@@ -8,8 +8,12 @@ import {
   HelpCircle,
   FileText,
 } from "lucide-react";
+import { logout } from "../store/feature/authSlice";
+import { useDispatch } from "react-redux";
 
 const AccountPage = () => {
+  const dispatch = useDispatch();
+
   const menuItems = [
     { key: "preferences", label: "Preferences", icon: Settings },
     { key: "notifications", label: "Notifications", icon: Bell },
@@ -19,6 +23,9 @@ const AccountPage = () => {
     { key: "help", label: "Help", icon: HelpCircle },
     { key: "legal", label: "Legal", icon: FileText },
   ];
+
+  // logout
+
   return (
     <>
       {/* <div className="min-h-screen bg-gray-100 flex items-start justify-center pt-6 px-4"> */}
@@ -55,7 +62,10 @@ const AccountPage = () => {
         </div>
 
         {/* Sign Out Button */}
-        <button className="w-full bg-gray-100 text-gray-900 font-semibold text-sm py-3 rounded-full hover:bg-gray-200 transition-colors mt-6 mb-1">
+        <button
+          onClick={(e) => dispatch(logout())}
+          className="w-full bg-gray-100 text-gray-900 font-semibold text-sm py-3 rounded-full hover:bg-gray-200 transition-colors mt-6 mb-1"
+        >
           Sign out
         </button>
         {/* </div> */}

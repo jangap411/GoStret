@@ -1,14 +1,24 @@
 import { HelpCircle } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, replace, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const SignUp = () => {
+  // navigate from react router
+  const navigate = useNavigate();
+
+  // create error state
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  // login data
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     emailOrPhone: "",
     password: "",
   });
+
   const [agreedToTerms, setAgreedToTerms] = useState(false);
 
   const handleInputChange = (e) => {
@@ -21,8 +31,20 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (
+      !formData.firstName ||
+      !formData.lastName ||
+      !formData.emailOrPhone ||
+      !formData.password
+    ) {
+      setErrorMessage("Please fill in all fields");
+      setIsError(true);
+    }
+
     if (agreedToTerms) {
       console.log("Form submitted:", formData);
+      navigate("/home", { replace: true });
     }
   };
 
@@ -43,6 +65,14 @@ const SignUp = () => {
 
           {/* Form */}
           <div className="space-y-3">
+            {/* display alert when error */}
+            <div>
+              {isError && (
+                <div className="bg-red-100 text-red-800 p-3 rounded-lg mb-4">
+                  <p className="text-sm">{errorMessage}</p>
+                </div>
+              )}
+            </div>
             {/* First Name */}
             <input
               type="text"

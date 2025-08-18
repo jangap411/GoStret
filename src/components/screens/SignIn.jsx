@@ -1,7 +1,7 @@
 import { ArrowLeft } from "lucide-react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import { loginSuccess } from "../../store/feature/authSlice";
 
 const SignIn = () => {
@@ -26,7 +26,7 @@ const SignIn = () => {
     }));
   };
 
-  const handleContinue = () => {
+  const handleContinue = async () => {
     //check required fields
     if (!formData.emailOrPhone || !formData.password) {
       console.log("Please fill in all fields");
@@ -41,7 +41,8 @@ const SignIn = () => {
       formData?.password === "password"
     ) {
       dispatch(loginSuccess({ email: formData.emailOrPhone }));
-      navigate("/home", { replace: true });
+      navigate("/home");
+      // redirect("/home");
       console.log("login success");
     } else {
       setErrorMessage("Invalid email or password");
