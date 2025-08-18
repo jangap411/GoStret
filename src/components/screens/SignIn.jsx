@@ -1,6 +1,8 @@
 import { ArrowLeft } from "lucide-react";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, redirect, useNavigate } from "react-router-dom";
+import { loginSuccess } from "../../store/feature/authSlice";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -8,6 +10,13 @@ const SignIn = () => {
     emailOrPhone: "",
     password: "",
   });
+
+  //get login state from redux
+  const dispatch = useDispatch();
+
+  // create error state
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -17,7 +26,30 @@ const SignIn = () => {
     }));
   };
 
-  const handleContinue = () => {
+  const handleContinue = async () => {
+    //check required fields
+    if (!formData.emailOrPhone || !formData.password) {
+      console.log("Please fill in all fields");
+      setErrorMessage("Please fill in all fields");
+      setIsError(true);
+      return;
+    }
+
+    //fake check user
+    if (
+      formData?.emailOrPhone === "admin@email.com" &&
+      formData?.password === "password"
+    ) {
+      dispatch(loginSuccess({ email: formData.emailOrPhone }));
+      navigate("/home");
+      // redirect("/home");
+      console.log("login success");
+    } else {
+      setErrorMessage("Invalid email or password");
+      setIsError(true);
+      return;
+    }
+
     console.log("Continue with credentials:", formData);
   };
 
@@ -48,11 +80,21 @@ const SignIn = () => {
 
           {/* Login Form */}
           <div className="space-y-3">
-            {/* Email or Phone */}
+            {/* <form> */}
+            <div>
+              {/* alert when error */}
+              {isError && (
+                <div className="bg-red-100 text-red-800 p-3 rounded-lg mb-4">
+                  <p className="text-sm">{errorMessage}</p>
+                </div>
+              )}
+            </div>
+            {/* Email */}
             <input
-              type="text"
+              required
+              type="email"
               name="emailOrPhone"
-              placeholder="Email or phone"
+              placeholder="Email"
               value={formData.emailOrPhone}
               onChange={handleInputChange}
               className="w-full bg-gray-50 border-none rounded-lg px-3.5 py-3 text-sm outline-none placeholder-gray-600"
@@ -60,6 +102,7 @@ const SignIn = () => {
 
             {/* Password */}
             <input
+              required
               type="password"
               name="password"
               placeholder="Password"
@@ -74,8 +117,6 @@ const SignIn = () => {
               className="block text-xs text-amber-700 underline mb-5 hover:text-amber-800 transition-colors"
             >
               Forgot password?
-              {/* <a href="#">
-                          </a> */}
             </Link>
             {/* Continue Button */}
             <button
@@ -104,6 +145,7 @@ const SignIn = () => {
             >
               Continue with Apple
             </button> */}
+            {/* </form> */}
           </div>
 
           {/* Footer Text */}
@@ -114,11 +156,6 @@ const SignIn = () => {
               className="text-amber-700 underline hover:text-amber-800 transition-colors"
             >
               Sign up
-              {/* <a
-                href="#"
-                
-              >
-              </a> */}
             </Link>
           </p>
         </div>

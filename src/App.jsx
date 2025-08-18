@@ -3,7 +3,7 @@ import SignIn from "./components/screens/SignIn";
 import SignUp from "./components/screens/SignUp";
 import Landing from "./pages/Landing";
 import MainLayout from "./pages/MainLayout";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PublicRouteLayout from "./pages/PublicRouteLayout";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import HomePage from "./pages/HomePage";
@@ -13,14 +13,17 @@ import RideShareApp from "./components/screens/RideShareApp";
 import RideActivity from "./components/RideActivity";
 import AccountPage from "./pages/AccountPage";
 import PublicRoute from "./pages/PublicRoute";
+import { useSelector } from "react-redux";
 const App = () => {
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  console.log(`isLoggedIn: ${isLoggedIn}`);
   return (
     <>
-      <Router>
+      <BrowserRouter>
         <Routes>
           {/* Public routes */}
           {/* FIXME: Update isLogin prop based on authentication state */}
-          <Route element={<PublicRoute isLogin={false} />}>
+          <Route element={<PublicRoute isLogin={isLoggedIn} />}>
             <Route element={<PublicRouteLayout />}>
               <Route path="/" element={<Landing />} />
               <Route path="/signin" element={<SignIn />} />
@@ -30,7 +33,7 @@ const App = () => {
           </Route>
 
           {/* Private routes */}
-          <Route element={<ProtectedRoute isLogin={false} />}>
+          <Route element={<ProtectedRoute isLogin={isLoggedIn} />}>
             <Route element={<MainLayout />}>
               <Route path="/home" element={<HomePage />} />
               <Route path="/account" element={<AccountPage />} />
@@ -41,7 +44,7 @@ const App = () => {
             </Route>
           </Route>
         </Routes>
-      </Router>
+      </BrowserRouter>
     </>
   );
 };
