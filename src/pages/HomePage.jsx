@@ -1,8 +1,5 @@
-import Header from "../components/Header";
 import LocationSearch from "../components/LocationSearch";
 import MapView from "../components/MapView";
-import BottomNav from "../components/BottomNav";
-import FloatingButton from "../components/FloatingButton";
 
 const HomePage = () => {
   return (

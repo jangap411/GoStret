@@ -38,8 +38,9 @@ const App = () => {
               <Route path="/home" element={<HomePage />} />
               <Route path="/account" element={<AccountPage />} />
               <Route path="/rides" element={<RidesScreen />} />
-              <Route path="/payments" element={<Payments />} />
-              <Route path="/share" element={<RideShareApp />} />
+              {/* swap payments and share routes */}
+              <Route path="/share" element={<Payments />} />
+              <Route path="/payments" element={<RideShareApp />} />
               <Route path="/activity" element={<RideActivity />} />
             </Route>
           </Route>

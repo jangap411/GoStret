@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { logout } from "../store/feature/authSlice";
 import { useDispatch } from "react-redux";
+import { setActiveTab } from "../store/appSlice";
 
 const AccountPage = () => {
   const dispatch = useDispatch();
@@ -24,7 +25,11 @@ const AccountPage = () => {
     { key: "legal", label: "Legal", icon: FileText },
   ];
 
-  // logout
+  // handle signout
+  const handleSignOut = () => {
+    dispatch(logout());
+    dispatch(setActiveTab("GoStret"));
+  };
 
   return (
     <>
@@ -63,7 +68,7 @@ const AccountPage = () => {
 
         {/* Sign Out Button */}
         <button
-          onClick={(e) => dispatch(logout())}
+          onClick={handleSignOut}
           className="w-full bg-gray-100 text-gray-900 font-semibold text-sm py-3 rounded-full hover:bg-gray-200 transition-colors mt-6 mb-1"
         >
           Sign out
