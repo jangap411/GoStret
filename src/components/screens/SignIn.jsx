@@ -80,72 +80,73 @@ const SignIn = () => {
 
           {/* Login Form */}
           <div className="space-y-3">
-            {/* <form> */}
-            <div>
-              {/* alert when error */}
-              {isError && (
-                <div className="bg-red-100 text-red-800 p-3 rounded-lg mb-4">
-                  <p className="text-sm">{errorMessage}</p>
-                </div>
-              )}
-            </div>
-            {/* Email */}
-            <input
-              required
-              type="email"
-              name="emailOrPhone"
-              placeholder="Email"
-              value={formData.emailOrPhone}
-              onChange={handleInputChange}
-              className="w-full bg-gray-50 border-none rounded-lg px-3.5 py-3 text-sm outline-none placeholder-gray-600"
-            />
+            <form onSubmit={handleContinue}>
+              <div>
+                {/* alert when error */}
+                {isError && (
+                  <div className="bg-red-100 text-red-800 p-3 rounded-lg mb-4">
+                    <p className="text-sm">{errorMessage}</p>
+                  </div>
+                )}
+              </div>
+              {/* Email */}
+              <input
+                required
+                type="email"
+                name="emailOrPhone"
+                placeholder="Email"
+                value={formData.emailOrPhone}
+                onChange={handleInputChange}
+                className="w-full bg-gray-50 border-none rounded-lg px-3.5 py-3 text-sm outline-none placeholder-gray-600"
+              />
 
-            {/* Password */}
-            <input
-              required
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={formData.password}
-              onChange={handleInputChange}
-              className="w-full bg-gray-50 border-none rounded-lg px-3.5 py-3 text-sm outline-none placeholder-gray-600"
-            />
+              {/* Password */}
+              <input
+                required
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={formData.password}
+                onChange={handleInputChange}
+                className="w-full bg-gray-50 border-none rounded-lg px-3.5 py-3 text-sm outline-none placeholder-gray-600"
+              />
 
-            {/* Forgot Password Link */}
-            <Link
-              to="/forgot-password"
-              className="block text-xs text-amber-700 underline mb-5 hover:text-amber-800 transition-colors"
-            >
-              Forgot password?
-            </Link>
-            {/* Continue Button */}
-            <button
-              onClick={handleContinue}
-              className="w-full bg-yellow-300 hover:bg-yellow-400 border-none rounded-full py-3 px-3 text-sm font-semibold text-black cursor-pointer transition-colors mb-5"
-            >
-              Continue
-            </button>
+              {/* Forgot Password Link */}
+              <Link
+                to="/forgot-password"
+                className="block text-xs text-amber-700 underline mb-5 hover:text-amber-800 transition-colors"
+              >
+                Forgot password?
+              </Link>
+              {/* Continue Button */}
+              <button
+                // onClick={handleContinue}
+                type="submit"
+                className="w-full bg-yellow-300 hover:bg-yellow-400 border-none rounded-full py-3 px-3 text-sm font-semibold text-black cursor-pointer transition-colors mb-5"
+              >
+                Continue
+              </button>
 
-            {/* Divider */}
-            <p className="text-xs text-gray-500 text-center my-4">
-              Or connect with
-            </p>
+              {/* Divider */}
+              <p className="text-xs text-gray-500 text-center my-4">
+                Or connect with
+              </p>
 
-            {/* Social Login Buttons */}
-            <button
-              onClick={handleFacebookLogin}
-              className="w-full bg-gray-50 hover:bg-amber-100 border-none rounded-full py-3 px-3 text-sm font-semibold text-black cursor-pointer transition-colors mb-3"
-            >
-              Continue with Gmail
-            </button>
+              {/* Social Login Buttons */}
+              <button
+                onClick={handleFacebookLogin}
+                className="w-full bg-gray-50 hover:bg-amber-100 border-none rounded-full py-3 px-3 text-sm font-semibold text-black cursor-pointer transition-colors mb-3"
+              >
+                Continue with Gmail
+              </button>
 
-            {/* <button
+              {/* <button
               onClick={handleAppleLogin}
               className="w-full bg-amber-50 hover:bg-amber-100 border-none rounded-full py-3 px-3 text-sm font-semibold text-black cursor-pointer transition-colors mb-3"
             >
               Continue with Apple
             </button> */}
-            {/* </form> */}
+            </form>
           </div>
 
           {/* Footer Text */}
