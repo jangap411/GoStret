@@ -1,7 +1,7 @@
 import { ArrowLeft } from "lucide-react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, redirect, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginSuccess } from "../../store/feature/authSlice";
 
 const SignIn = () => {
@@ -97,6 +97,7 @@ const SignIn = () => {
                 placeholder="Email"
                 value={formData.emailOrPhone}
                 onChange={handleInputChange}
+                // className="w-full bg-gray-50 border-none rounded-lg px-3.5 py-3 text-sm outline-none placeholder-gray-600"
                 className="w-full bg-gray-50 border-none rounded-lg px-3.5 py-3 text-sm outline-none placeholder-gray-600"
               />
 

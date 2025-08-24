@@ -40,9 +40,9 @@ const App = () => {
               <Route path="/rides" element={<RidesScreen />} />
               {/* swap payments and share routes */}
               <Route path="/share" element={<Payments />} />
-              <Route path="/payments" element={<RideShareApp />} />
               <Route path="/activity" element={<RideActivity />} />
             </Route>
+            <Route path="/payments" element={<RideShareApp />} />
           </Route>
         </Routes>
       </BrowserRouter>
